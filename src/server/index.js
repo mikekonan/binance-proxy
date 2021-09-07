@@ -6,6 +6,7 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 import SocksProxyAgent from "socks-proxy-agent";
 
 const socksAddr = process.env.SOCKS_ADDR;
+const proxyTarget = process.env.PROXY_TARGET || "https://api.binance.com";
 
 const getServer = async (client) => {
   const app = express();
@@ -26,7 +27,7 @@ const getServer = async (client) => {
   if (!!socksAddr) {
     router.use(
       createProxyMiddleware({
-        target: "https://api.binance.com",
+        target: proxyTarget,
         changeOrigin: true,
         agent: new SocksProxyAgent(socksAddr),
       })
@@ -34,7 +35,7 @@ const getServer = async (client) => {
   } else {
     router.use(
       createProxyMiddleware({
-        target: "https://api.binance.com",
+        target: proxyTarget,
         changeOrigin: true,
       })
     );

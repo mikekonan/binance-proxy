@@ -22,8 +22,6 @@ const getServer = async (client) => {
       .then((result) => res.send(result));
   });
 
-  let proxy;
-
   if (!!socksAddr) {
     router.use(
       createProxyMiddleware({

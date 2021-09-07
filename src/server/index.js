@@ -26,7 +26,7 @@ const getServer = async (client) => {
   if (!!socksAddr) {
     router.use(
       createProxyMiddleware({
-        target: "https://ifconfig.me",
+        target: "https://api.binance.com",
         changeOrigin: true,
         agent: new SocksProxyAgent(socksAddr),
       })
